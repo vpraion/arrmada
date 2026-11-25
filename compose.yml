@@ -1,0 +1,20 @@
+services:
+  jellyfin:
+    image: lscr.io/linuxserver/jellyfin:latest
+    container_name: jellyfin
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      - PUID=2001
+      - PGID=2000
+      - TZ=Europe/Paris
+      - JELLYFIN_PublishedServerUrl=https://jellyfin.snorlaxians.duckdns.org
+    ports:
+      - 8096:8096
+    volumes:
+      - ./config:/config
+      - /srv/media:/media:ro,rslave
+      - ./jellyfin-web-custom:/usr/share/jellyfin/web:ro
+    tmpfs:
+      - /transcode:size=16g,uid=2001,gid=2000,mode=0750,noexec,nosuid,nodev
