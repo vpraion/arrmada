@@ -15,6 +15,6 @@ services:
     volumes:
       - ./config:/config
       - /srv/media:/media:ro,rslave
-      - ./jellyfin-web-custom:/usr/share/jellyfin/web:ro
+      - ./.jellyfin-web-custom:/usr/share/jellyfin/web:ro
     tmpfs:
       - /transcode:size=16g,uid=2001,gid=2000,mode=0750,noexec,nosuid,nodev
